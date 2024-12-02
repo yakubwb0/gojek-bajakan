@@ -9,7 +9,7 @@ const HeroSection = () => {
         color: 'white',
         padding: '80px 20px',
         textAlign: 'center',
-        zIndex: 0,
+        zIndex: -1,
       }}
     >
       {/* Heading */}

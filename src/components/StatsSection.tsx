@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Container } from '@mui/material';
 import Image from 'next/image'; // If using Next.js
 
 const ScaleSection = () => {
@@ -40,6 +40,7 @@ const ScaleSection = () => {
         backgroundColor: 'white', // Section background
         padding: '80px 20px',
         textAlign: 'center',
+        zIndex: '2',
       }}
     >
       {/* Section Heading */}
@@ -47,8 +48,10 @@ const ScaleSection = () => {
         variant="h3"
         sx={{
           fontWeight: 'bold',
-          marginBottom: '20px',
+          marginBottom: '40px', // Increased margin for visibility
           color: 'black', // Text color for better visibility
+          position: 'relative',
+          zIndex: '5', // Ensure the text is above other elements
         }}
       >
         We scale like a dream
@@ -71,72 +74,100 @@ const ScaleSection = () => {
       >
         Scale with us
       </Button>
-      {/* Flexbox Container */}
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          gap: '20px', // Space between items
-        }}
-      >
-        {items.map((item, index) => (
-          <Box
-            key={index}
-            sx={{
-              backgroundColor: item.bgColor, // Individual background color
-              borderRadius: '12px',
-              padding: '20px',
-              textAlign: 'left',
-              maxWidth: '300px',
-              width: 'calc(25% - 100px)', // Adjust width for 4 items in a row
-              boxShadow: item.shadow, // Individual shadow color
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'bottom',
-              marginTop:'150px',
-              height:'350px',
-              marginLeft:'20px',
-              marginRight:'20px',
-            }}
-          >
-            {/* Image */}
-            <Image
-              src={item.imageSrc}
-              alt={item.title}
-              width={400} // Adjust image width
-              height={400} // Adjust image height
-              style={{
-                marginBottom: '20px',
-                position:'relative',
-                bottom:'100px',
-                left:'12%',
-                width:'120%',
-                height:'auto',
-                display:'flex',
-                overflow:'visible',
-              }}
-            />
-            {/* Title */}
-            <Typography
-              variant="h5"
+
+      {/* Container for responsive layout */}
+      <Container sx={{ marginTop: '40px' }}>
+        {/* Flexbox Container */}
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            gap: '20px', // Space between items
+            marginTop: '20px',
+          }}
+        >
+          {items.map((item, index) => (
+            <Box
+              key={index}
               sx={{
-                fontWeight: 'bold',
-                color: 'black',
-                marginTop: '-80px',
-                fontSize:'44px',
-                position:'relative',
+                backgroundColor: item.bgColor, // Individual background color
+                borderRadius: '12px',
+                padding: '20px',
+                textAlign: 'left',
+                maxWidth: '200px',
+                width: {
+                  xs: '100%',  // Full width for mobile
+                  sm: 'calc(50% - 40px)', // Two items per row on small screens
+                  md: 'calc(25% - 40px)', // Four items per row on larger screens
+                },
+                boxShadow: item.shadow, // Individual shadow color
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'bottom',
+                marginTop: '20px',
+                height: '350px',
+                marginLeft: '20px',
+                marginRight: '20px',
+                zIndex: '2',
               }}
             >
-              {item.title}
-            </Typography>
-            {/* Description */}
-            <Typography variant="body1" sx={{ color: 'black', fontSize:'20px', position:'relative' }}>
-              {item.description}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
+              {/* Image */}
+              <Image
+                src={item.imageSrc}
+                alt={item.title}
+                width={400} // Adjust image width
+                height={400} // Adjust image height
+                style={{
+                  marginBottom: '20px',
+                  position: 'relative',
+                  bottom: '50px', // Lowered the image
+                  left: '12%',
+                  width: '120%',
+                  height: 'auto',
+                  display: 'flex',
+                  overflow: 'visible',
+                  zIndex: '2',
+                }}
+              />
+              {/* Title */}
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: 'bold',
+                  color: 'black',
+                  marginTop: '-60px', // Adjusted the margin to create space for the image
+                  fontSize: {
+                    xs: '24px',  // Smaller title font size on mobile
+                    sm: '36px',  // Larger font on small screens
+                    md: '44px',  // Even larger font on medium screens
+                  },
+                  position: 'relative',
+                  zIndex: '2',
+                }}
+              >
+                {item.title}
+              </Typography>
+              {/* Description */}
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'black',
+                  fontSize: {
+                    xs: '14px', // Smaller text on mobile
+                    sm: '18px', // Larger text on small screens
+                    md: '20px', // Even larger on medium screens
+                  },
+                  position: 'relative',
+                  zIndex: '2',
+                }}
+              >
+                {item.description}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+      </Container>
     </Box>
   );
 };

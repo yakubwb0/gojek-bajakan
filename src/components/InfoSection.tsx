@@ -120,12 +120,12 @@ const InfoSection = () => {
         sx={{
           backgroundColor: 'white',
           borderRadius: '100px 100px 0 0', // Curved top for the white background
-          padding: '135px',
+          padding: '500px',
           marginTop: '40px',
           position: 'absolute',
           width: '100vw', // Adjust width for better responsiveness
           zIndex: 0, // Ensure it appears behind the content
-          bottom: '-950px',
+          bottom: '-1700px',
           left: '50%',
           transform: 'translateX(-50%)',
         }}
